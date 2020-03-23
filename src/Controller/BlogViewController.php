@@ -10,9 +10,9 @@ class BlogViewController extends AbstractController
 {
 
     /**
-     * @Route("/blog/{id}", name="blog_view", requirements={"page"="\d+", "methods"="GET"})
+     * @Route("/blog/{id}/{slug}", name="blog_view", requirements={"page"="\d+", "methods"="GET"})
      */
-    public function show($id)
+    public function show($id, $slug)
     {
         $em = $this->getDoctrine()->getManager();
 

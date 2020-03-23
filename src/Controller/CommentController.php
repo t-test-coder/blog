@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Entity\Comment;
 use App\Form\CommentType;
 use Symfony\Component\HttpFoundation\Request;
@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Comment controller.
  */
-class CommentController extends Controller
+class CommentController extends AbstractController
 {
     public function new($blog_id)
     {
@@ -47,8 +47,9 @@ class CommentController extends Controller
             $em->flush();
 
             return $this->redirect($this->generateUrl('blog_view', array(
-                    'id' => $comment->getBlog()->getId())) .
-                '#comment-' . $comment->getId()
+              'id'    => $comment->getBlog()->getId(),
+              'slug'  => $comment->getBlog()->getSlug())) .
+              '#comment-' . $comment->getId()
             );
         }
 

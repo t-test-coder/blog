@@ -71,4 +71,26 @@ class BlogController extends AbstractController
 
     }
 
+    public function sidebar()
+    {
+        $em = $this->getDoctrine()
+                   ->getManager();
+
+        $tags = $em->getRepository('App:Blog')
+                   ->getTags();
+
+        $tagWeights = $em->getRepository('App:Blog')
+                         ->getTagWeights($tags);
+
+         $commentLimit   = 10;
+        $latestComments = $em->getRepository('App:Comment')
+                             ->getLatestComments($commentLimit);
+
+        return $this->render('sidebar.html.twig', array(
+            'tags' => $tagWeights,
+            'latestComments'    => $latestComments,
+            'controller_name' => 'BlogController'
+        ));
+    }
+
 }
