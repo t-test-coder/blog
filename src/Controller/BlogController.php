@@ -17,8 +17,16 @@ class BlogController extends AbstractController
      */
     public function index()
     {
+        $em = $this->getDoctrine()
+                   ->getManager();
+
+       $blogs = $em->getRepository('App:Blog')
+                    ->getLatestBlogs();
+
+
         return $this->render('blog/index.html.twig', [
             'controller_name' => 'BlogController',
+            'blogs' => $blogs,
         ]);
     }
 

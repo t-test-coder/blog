@@ -2,11 +2,13 @@
 
 namespace App\DataFixtures;
 
-use Doctrine\Bundle\FixturesBundle\Fixture;
+
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Bundle\FixturesBundle\Fixture;
 use App\Entity\Blog;
 
-class AppFixtures extends Fixture
+class AppFixtures extends Fixture implements OrderedFixtureInterface
 {
   public function load(ObjectManager $manager)
   {
@@ -60,6 +62,19 @@ class AppFixtures extends Fixture
       $blog5->setUpdated($blog5->getCreated());
       $manager->persist($blog5);
 
+
+
+      $this->addReference('blog-1', $blog1);
+      $this->addReference('blog-2', $blog2);
+      $this->addReference('blog-3', $blog3);
+      $this->addReference('blog-4', $blog4);
+      $this->addReference('blog-5', $blog5);
+
       $manager->flush();
+  }
+
+  public function getOrder()
+  {
+      return 1;
   }
 }
