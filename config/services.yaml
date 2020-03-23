@@ -29,3 +29,16 @@ services:
     #     class: App\Twig\Extensions\BloggerBlogExtension
     #     tags:
     #         - { name: twig.extension }
+    App\Admin\BlogAdmin:
+        arguments: [~, App\Entity\Blog, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Blog }
+
+    App\Admin\CommentsAdmin:
+        arguments: [~, App\Entity\Comment, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Comments }
+
+    mailer:
+        alias: fos_user.mailer.noop
+        public: true

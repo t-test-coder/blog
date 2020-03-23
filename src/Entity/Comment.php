@@ -76,7 +76,7 @@ class Comment
     }
 
     /**
-     * @ORM\preUpdate
+     * @ORM\PreUpdate
      */
     public function setUpdatedValue()
     {
@@ -93,6 +93,9 @@ class Comment
         return $this->id;
     }
 
+    public function getBlogId() {
+      return $this->blog;
+    }
     /**
      * Set user
      *
