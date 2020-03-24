@@ -21,7 +21,7 @@ final class CommentsAdmin extends AbstractAdmin
 {
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $formMapper->add('blog_id', TextType::class);
+        $formMapper->add('id', TextType::class);
         $formMapper->add('user', TextType::class);
         $formMapper->add('comment', TextType::class);
 
