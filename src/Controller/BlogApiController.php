@@ -46,13 +46,19 @@ class BlogApiController extends FOSRestController
                 'csrf_protection' => false,
             ]);
 
+            $form->handleRequest($request);
             $form->submit($request->request->all());
 
             if (!$form->isValid()) {
                 return $form;
             }
+            $blogPost = $form->getData();
 
-            return $form->getData();
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($blogPost);
+            $em->flush();
+
+            return 'ok';
 
         }
 

@@ -127,4 +127,18 @@ class CommentApiController extends FOSRestController
 
              return "ok";
            }
+
+           protected function getBlog($blog_id)
+           {
+               $em = $this->getDoctrine()
+                   ->getManager();
+
+               $blog = $em->getRepository('App:Blog')->find($blog_id);
+
+               if (!$blog) {
+                   throw $this->createNotFoundException('Unable to find Blog post.');
+               }
+
+               return $blog;
+           }
 }
