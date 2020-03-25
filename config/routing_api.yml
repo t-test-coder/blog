@@ -1,0 +1,7 @@
+blog_posts:
+    type: rest
+    resource: App\Controller\BlogApiController
+
+comments:
+    type: rest
+    resource: App\Controller\CommentApiController    
